@@ -11,12 +11,12 @@ export default function Navbar() {
         <Link to="/">React Quiz App</Link>
       </div>
       <div className={"header-right-side"}>
-        <span>{"XYZ"}, logged in</span>
+        <span>{"XYZ"}, Signed in</span>
         {/* <Link to="/signin">
           <LoginOutlined /> Sign In
         </Link> */}
         <Link to="/signin">
-          <LogoutOutlined /> Log Out
+          <LogoutOutlined /> Sign Out
         </Link>
       </div>
     </Header>
