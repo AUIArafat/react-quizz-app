@@ -1,0 +1,9 @@
+.ant-layout-content {
+  margin-top: 60px;
+  height: calc(100vh - 60px) !important;
+  background: linear-gradient(
+    to right bottom,
+    rgba(14, 149, 148, 0.8),
+    rgba(40, 180, 133, 0.8)
+  );
+}
