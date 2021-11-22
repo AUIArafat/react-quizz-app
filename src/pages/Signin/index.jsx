@@ -1,11 +1,22 @@
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined, LoginOutlined } from "@ant-design/icons";
 
 import "./style/index.css";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../../contexts/Context";
+import { useHistory } from "react-router";
 
 export default function SingInForm() {
-  const onFinish = (values) => {
+  const { authenticateUser, currentUser } = useContext(UserContext);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (currentUser) history.push("/");
+  }, [currentUser]);
+
+  const onFinish = async (values) => {
     console.log("Received values of form: ", values);
+    await authenticateUser(values.email, values.password);
   };
 
   return (
@@ -21,18 +32,19 @@ export default function SingInForm() {
         <h1>Sign in to Continue</h1>
       </Form.Item>
       <Form.Item
-        name="username"
+        name="email"
         rules={[
           {
             required: true,
-            message: "Please input your Username!",
+            message: "Please input your Email!",
           },
         ]}
       >
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
-          placeholder="Username"
+          placeholder="Email"
           autoComplete={"new-password"}
+          type="email"
         />
       </Form.Item>
       <Form.Item
