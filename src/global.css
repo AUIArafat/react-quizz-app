@@ -13,3 +13,14 @@ body {
   line-height: 1.7;
   color: #777;
 }
+
+.ant-btn-primary {
+  border-color: #fff;
+  background: rgb(80, 170, 167);
+}
+.ant-btn-primary:hover,
+.ant-btn-primary:active,
+.ant-btn-primaryfocus {
+  border-color: #fff;
+  background: rgba(80, 170, 167, 0.9);
+}

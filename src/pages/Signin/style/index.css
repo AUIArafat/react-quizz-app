@@ -11,14 +11,6 @@
 }
 .signin-form-button {
   width: 100%;
-  border-color: #fff;
-  background: rgb(80, 170, 167);
-}
-.signin-form-button:hover,
-.signin-form-button:active,
-.signin-form-button:focus {
-  border-color: #fff;
-  background: rgba(80, 170, 167, 0.9);
 }
 .signin-header {
   border-bottom: 1px solid black;

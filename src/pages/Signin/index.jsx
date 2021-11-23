@@ -14,9 +14,8 @@ export default function SingInForm() {
     if (currentUser) history.push("/");
   }, [currentUser]);
 
-  const onFinish = async (values) => {
-    console.log("Received values of form: ", values);
-    await authenticateUser(values.email, values.password);
+  const onFinish = (values) => {
+    authenticateUser(values.email, values.password);
   };
 
   return (

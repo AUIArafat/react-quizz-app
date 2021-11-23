@@ -32,7 +32,6 @@ export const verifyUser = (email, password) => {
     const user = users.find(
       (user) => user.email === email && user.password === password
     );
-    console.log(user);
     if (user) {
       setTimeout(() => resolve(user), 500);
     }
