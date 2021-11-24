@@ -1,0 +1,21 @@
+.dynamic_form_nest_item {
+  margin: 10px 120px 10px;
+  padding: 40px;
+  border-radius: 6px;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 20%);
+  height: calc(100vh - 220px);
+  overflow: auto;
+  position: relative;
+}
+
+.add-question-form {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  height: 87px;
+  padding: 20px 120px;
+  align-items: center;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 20%);
+  justify-content: center;
+}

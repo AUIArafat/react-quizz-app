@@ -14,7 +14,7 @@ export default function SingInForm() {
     if (currentUser) history.push("/");
   }, [currentUser]);
 
-  const onFinish = (values) => {
+  const authenticate = (values) => {
     authenticateUser(values.email, values.password);
   };
 
@@ -25,9 +25,9 @@ export default function SingInForm() {
       initialValues={{
         remember: true,
       }}
-      onFinish={onFinish}
+      onFinish={authenticate}
     >
-      <Form.Item className={"signin-header"}>
+      <Form.Item className={"form-title"}>
         <h1>Sign in to Continue</h1>
       </Form.Item>
       <Form.Item

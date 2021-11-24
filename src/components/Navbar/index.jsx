@@ -5,8 +5,8 @@ import { Link, useHistory } from "react-router-dom";
 import "./style/index.css";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/Context";
-import { storageData } from "../../utils/storageData";
 import { Button } from "antd";
+import { ArrowRightOutlined, QuestionCircleOutlined } from "@ant-design/icons";
 
 export default function Navbar() {
   const { currentUser, logout } = useContext(UserContext);
@@ -20,6 +20,35 @@ export default function Navbar() {
         {currentUser ? (
           <>
             <span>{currentUser.name}, Signed in</span>{" "}
+            {currentUser.userType !== "Admin" ? (
+              <Button
+                onClick={() => {
+                  history.push("/quiz");
+                }}
+                type={"primary"}
+              >
+                Start Quiz <ArrowRightOutlined />
+              </Button>
+            ) : (
+              <>
+                <Button
+                  onClick={() => {
+                    history.push("/answers");
+                  }}
+                  type={"primary"}
+                >
+                  Answers
+                </Button>
+                <Button
+                  onClick={() => {
+                    history.push("/questions");
+                  }}
+                  type={"primary"}
+                >
+                  <QuestionCircleOutlined /> Questions
+                </Button>
+              </>
+            )}
             <Button
               onClick={() => {
                 logout();

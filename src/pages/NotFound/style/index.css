@@ -1,0 +1,16 @@
+.text-box {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.primary-heading > span {
+  color: #fff;
+  text-transform: uppercase;
+  display: block;
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: 4px;
+}

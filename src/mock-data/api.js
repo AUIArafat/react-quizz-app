@@ -1,0 +1,159 @@
+import { v4 as uuidv4 } from "uuid";
+import { storageData } from "../utils/storageData";
+let users = [
+  {
+    id: uuidv4(),
+    email: "admin@quiz-app.com",
+    password: "admin",
+    name: "Admin",
+    userType: "Admin",
+  },
+  {
+    id: uuidv4(),
+    email: "user1@quiz-app.com",
+    password: "12345",
+    name: "Mark",
+    userType: "User",
+  },
+  {
+    id: uuidv4(),
+    email: "user2@quiz-app.com",
+    password: "12345",
+    name: "Henry",
+    userType: "User",
+  },
+  {
+    id: uuidv4(),
+    email: "user3@quiz-app.com",
+    password: "12345",
+    name: "Bob",
+    userType: "User",
+  },
+];
+
+let questions = [
+  {
+    id: uuidv4(),
+    question: "What are the different data types present in javascript?",
+  },
+  {
+    id: uuidv4(),
+    question: "Explain Hoisting in javascript.",
+  },
+  {
+    id: uuidv4(),
+    question: "What is an Immediately Invoked Function in javascript?",
+  },
+  {
+    id: uuidv4(),
+    question: "What is the use of a constructor function in javascript?",
+  },
+];
+
+let answers = [
+  {
+    id: uuidv4(),
+    questions: {
+      id: uuidv4(),
+      question: "What are the different data types present in javascript?",
+    },
+    answer: "This test answer",
+    previousAnswer: ["This is first answer", "this is second answer"],
+    answeredBy: {
+      email: "user1@quiz-app.com",
+      name: "Mark",
+    },
+  },
+  {
+    id: uuidv4(),
+    questions: {
+      question: "What are the different data types present in javascript?",
+    },
+    answer: "This test answer",
+    previousAnswer: ["This is first answer", "this is second answer"],
+    answeredBy: {
+      email: "user1@quiz-app.com",
+      name: "Mark",
+    },
+  },
+  {
+    id: uuidv4(),
+    questions: {
+      id: uuidv4(),
+      question: "What are the different data types present in javascript?",
+    },
+    answer: "This test answer",
+    previousAnswer: ["This is first answer", "this is second answer"],
+    answeredBy: {
+      email: "user1@quiz-app.com",
+      name: "Mark",
+    },
+  },
+];
+
+export const verifyUser = (email, password) => {
+  return new Promise((resolve, reject) => {
+    const user = users.find(
+      (user) => user.email === email && user.password === password
+    );
+    if (user) {
+      setTimeout(() => resolve(user), 500);
+    }
+    setTimeout(() => reject(new Error("User not found")), 500);
+  });
+};
+
+export const getAllQuestions = () => {
+  return new Promise((resolve, reject) => {
+    if (
+      !storageData.getValue("questions") ||
+      storageData.getValue("questions") === undefined
+    ) {
+      storageData.setValue("questions", questions);
+      setTimeout(() => resolve(questions), 500);
+    } else {
+      setTimeout(() => resolve(storageData.getValue("questions")), 500);
+    }
+    setTimeout(() => reject(new Error("Something went wrong!!!")), 500);
+  });
+};
+
+export const createQuestion = (data) => {
+  return new Promise((resolve, reject) => {
+    console.log(data);
+    if (!data.question) {
+      reject(new Error("Not empty question allowed!!!"));
+    }
+    let allQuestions = storageData.getValue("questions");
+    const id = uuidv4();
+    const newQuestion = { id: id, question: data.question };
+
+    allQuestions = [...allQuestions, newQuestion];
+
+    setTimeout(() => resolve(allQuestions), 500);
+  });
+};
+
+export const updateQuestions = (id, question) =>
+  new Promise((resolve, reject) => {
+    const allQuestions = storageData.getValue("questions");
+    const questionIdx = allQuestions.findIndex(
+      (question) => question.id === id
+    );
+    if (!question) {
+      return setTimeout(() => reject(new Error("Question not found")), 250);
+    }
+
+    allQuestions[questionIdx].question = question;
+    storageData.setValue("questions", allQuestions);
+    return setTimeout(() => resolve(allQuestions), 250);
+  });
+
+export const deleteQuestions = (id) => {
+  return new Promise((resolve, reject) => {
+    const allQuestions = storageData.getValue("questions");
+    const filteredQuestions = allQuestions.filter((item) => item.id !== id);
+    setTimeout(() => resolve(filteredQuestions), 500);
+    setTimeout(() => reject(new Error("User not found")), 500);
+  });
+};

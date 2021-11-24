@@ -13,9 +13,11 @@ export const storageData = {
     sessionStorage.removeItem("login_user");
   },
   setValue(key, value) {
-    return localStorage.setItem(key, value);
+    return localStorage.setItem(key, JSON.stringify(value));
   },
   getValue(key) {
-    return localStorage.getItem(key);
+    const value = localStorage.getItem(key);
+    if (value) return JSON.parse(value);
+    return null;
   },
 };

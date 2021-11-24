@@ -1,6 +1,12 @@
 import { createContext, useEffect, useState } from "react";
 import { storageData } from "../utils/storageData";
-import { verifyUser } from "../mock-data/data";
+import {
+  createQuestion,
+  deleteQuestions,
+  getAllQuestions,
+  updateQuestions,
+  verifyUser,
+} from "../mock-data/api";
 
 export const UserContext = createContext({
   currentUser: null,
@@ -9,12 +15,17 @@ export const UserContext = createContext({
   loading: false,
   error: null,
   setError: () => {},
+  questions: [],
+  fetchAllQuestions: () => {},
+  removeQuestion: () => {},
+  addQuestion: () => {},
 });
 
 export function UserProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [error, setError] = useState(null);
+  const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
     const user = storageData.getLoggedInUser();
@@ -26,6 +37,61 @@ export function UserProvider({ children }) {
       .then((user) => {
         storageData.setLoggedInUser(user);
         setCurrentUser(user);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        setError(error.toString());
+      });
+  }
+
+  async function fetchAllQuestions() {
+    setLoading(true);
+    await getAllQuestions()
+      .then((res) => {
+        storageData.setValue("questions", res);
+        setQuestions(res);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        setError(error.toString());
+      });
+  }
+
+  async function addQuestion(data) {
+    setLoading(true);
+    await createQuestion(data)
+      .then((res) => {
+        storageData.setValue("questions", res);
+        setQuestions(res);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        setError(error.toString());
+      });
+  }
+  async function editQuestions(id, question) {
+    setLoading(true);
+    await updateQuestions(id, question)
+      .then((res) => {
+        storageData.setValue("questions", res);
+        setQuestions(res);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        setError(error.toString());
+      });
+  }
+
+  async function removeQuestion(id) {
+    setLoading(true);
+    await deleteQuestions(id)
+      .then((res) => {
+        storageData.setValue("questions", res);
+        setQuestions(res);
         setLoading(false);
       })
       .catch((error) => {
@@ -46,6 +112,11 @@ export function UserProvider({ children }) {
     logout,
     error,
     setError,
+    questions,
+    fetchAllQuestions,
+    editQuestions,
+    removeQuestion,
+    addQuestion,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
