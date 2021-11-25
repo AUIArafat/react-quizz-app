@@ -1,11 +1,12 @@
 import { Form, Input, Button } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-
-import "./style/index.css";
 import { Typography } from "antd";
 import { useContext, useEffect } from "react";
-import { UserContext } from "../../contexts/Context";
 import { useHistory } from "react-router";
+import SubHeader from "../../components/SubHeader";
+import { UserContext } from "../../contexts/Context";
+import "./style/index.css";
+
 const { Paragraph } = Typography;
 
 export const Questions = () => {
@@ -34,18 +35,16 @@ export const Questions = () => {
     form.resetFields();
   };
   useEffect(() => {
-    if (currentUser.userType !== "Admin") history.push("/");
+    if (currentUser && currentUser.userType !== "Admin") history.push("/");
     fetchAllQuestions();
   }, []);
   return (
     <>
-      <div className={"form-title"}>
-        <h1>Questions</h1>
-      </div>
+      <SubHeader title={"Questions"} />
       <Form
         name="dynamic_form_nest_item"
         autoComplete="off"
-        className={"dynamic_form_nest_item"}
+        className={"container"}
       >
         {questions.map((question, index) => (
           <Form.Item key={question.id}>

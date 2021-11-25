@@ -50,46 +50,59 @@ let questions = [
   },
 ];
 
-let answers = [
-  {
-    id: uuidv4(),
-    questions: {
-      id: uuidv4(),
+let answers = {
+  ["user1@quiz-app.com"]: {
+    [uuidv4()]: {
       question: "What are the different data types present in javascript?",
+      answer: "This test answer",
+      previousAnswer: ["This is first answer", "this is second answer"],
     },
-    answer: "This test answer",
-    previousAnswer: ["This is first answer", "this is second answer"],
-    answeredBy: {
-      email: "user1@quiz-app.com",
-      name: "Mark",
+    [uuidv4()]: {
+      question: "What are the different data types present in javascript?",
+      answer: "This test answer",
+      previousAnswer: ["This is first answer", "this is second answer"],
+    },
+    [uuidv4()]: {
+      question: "What are the different data types present in javascript?",
+      answer: "This test answer",
+      previousAnswer: ["This is first answer", "this is second answer"],
     },
   },
-  {
-    id: uuidv4(),
-    questions: {
+  ["user2@quiz-app.com"]: {
+    [uuidv4()]: {
       question: "What are the different data types present in javascript?",
+      answer: "This test answer",
+      previousAnswer: ["This is first answer", "this is second answer"],
     },
-    answer: "This test answer",
-    previousAnswer: ["This is first answer", "this is second answer"],
-    answeredBy: {
-      email: "user1@quiz-app.com",
-      name: "Mark",
+    [uuidv4()]: {
+      question: "What are the different data types present in javascript?",
+      answer: "This test answer",
+      previousAnswer: ["This is first answer", "this is second answer"],
+    },
+    [uuidv4()]: {
+      question: "What are the different data types present in javascript?",
+      answer: "This test answer",
+      previousAnswer: ["This is first answer", "this is second answer"],
     },
   },
-  {
-    id: uuidv4(),
-    questions: {
-      id: uuidv4(),
+  ["user3@quiz-app.com"]: {
+    [uuidv4()]: {
       question: "What are the different data types present in javascript?",
+      answer: "This test answer",
+      previousAnswer: ["This is first answer", "this is second answer"],
     },
-    answer: "This test answer",
-    previousAnswer: ["This is first answer", "this is second answer"],
-    answeredBy: {
-      email: "user1@quiz-app.com",
-      name: "Mark",
+    [uuidv4()]: {
+      question: "What are the different data types present in javascript?",
+      answer: "This test answer",
+      previousAnswer: ["This is first answer", "this is second answer"],
+    },
+    [uuidv4()]: {
+      question: "What are the different data types present in javascript?",
+      answer: "This test answer",
+      previousAnswer: ["This is first answer", "this is second answer"],
     },
   },
-];
+};
 
 export const verifyUser = (email, password) => {
   return new Promise((resolve, reject) => {
@@ -155,5 +168,20 @@ export const deleteQuestions = (id) => {
     const filteredQuestions = allQuestions.filter((item) => item.id !== id);
     setTimeout(() => resolve(filteredQuestions), 500);
     setTimeout(() => reject(new Error("User not found")), 500);
+  });
+};
+
+export const getAllAnswers = () => {
+  return new Promise((resolve, reject) => {
+    if (
+      !storageData.getValue("answers") ||
+      storageData.getValue("answers") === undefined
+    ) {
+      storageData.setValue("answers", answers);
+      setTimeout(() => resolve(answers), 500);
+    } else {
+      setTimeout(() => resolve(storageData.getValue("answers")), 500);
+    }
+    setTimeout(() => reject(new Error("Something went wrong!!!")), 500);
   });
 };

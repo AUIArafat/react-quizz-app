@@ -3,6 +3,7 @@ import { storageData } from "../utils/storageData";
 import {
   createQuestion,
   deleteQuestions,
+  getAllAnswers,
   getAllQuestions,
   updateQuestions,
   verifyUser,
@@ -19,6 +20,8 @@ export const UserContext = createContext({
   fetchAllQuestions: () => {},
   removeQuestion: () => {},
   addQuestion: () => {},
+  answers: {},
+  fetchAllAnswers: () => {},
 });
 
 export function UserProvider({ children }) {
@@ -26,6 +29,7 @@ export function UserProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [error, setError] = useState(null);
   const [questions, setQuestions] = useState([]);
+  const [answers, setAnswers] = useState([]);
 
   useEffect(() => {
     const user = storageData.getLoggedInUser();
@@ -100,6 +104,20 @@ export function UserProvider({ children }) {
       });
   }
 
+  async function fetchAllAnswers() {
+    setLoading(true);
+    await getAllAnswers()
+      .then((res) => {
+        storageData.setValue("answers", res);
+        setAnswers(res);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        setError(error.toString());
+      });
+  }
+
   function logout() {
     storageData.logout();
     setCurrentUser(null);
@@ -117,6 +135,8 @@ export function UserProvider({ children }) {
     editQuestions,
     removeQuestion,
     addQuestion,
+    fetchAllAnswers,
+    answers,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
