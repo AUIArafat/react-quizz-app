@@ -9,7 +9,8 @@ export default function Home() {
   const history = useHistory();
   const { currentUser } = useContext(UserContext);
   useEffect(() => {
-    if (currentUser.userType === "Admin") history.push("/questions");
+    if (currentUser && currentUser.userType === "Admin")
+      history.push("/questions");
   }, []);
   return (
     <div className={"text-box"}>

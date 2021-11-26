@@ -1,14 +1,17 @@
 import { QuestionCircleOutlined, UserOutlined } from "@ant-design/icons";
 import { Collapse, Form, Table } from "antd";
 import { useContext, useEffect } from "react";
+import { useHistory } from "react-router";
 import SubHeader from "../../components/SubHeader";
 import { UserContext } from "../../contexts/Context";
 import "./style/index.css";
 
 const { Panel } = Collapse;
 export default function Answers() {
-  const { fetchAllAnswers, answers } = useContext(UserContext);
+  const { fetchAllAnswers, answers, currentUser } = useContext(UserContext);
+  const history = useHistory();
   useEffect(() => {
+    if (currentUser?.userType !== "Admin") history.push("/");
     fetchAllAnswers();
   }, []);
   return (

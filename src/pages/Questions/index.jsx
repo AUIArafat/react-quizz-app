@@ -35,7 +35,7 @@ export const Questions = () => {
     form.resetFields();
   };
   useEffect(() => {
-    if (currentUser && currentUser.userType !== "Admin") history.push("/");
+    if (currentUser?.userType !== "Admin") history.push("/");
     fetchAllQuestions();
   }, []);
   return (
