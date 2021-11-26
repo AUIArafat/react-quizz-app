@@ -1,0 +1,7 @@
+.question-collapse:nth-child(odd) {
+  background: #caebe2;
+}
+
+.question-collapse:nth-child(even) {
+  background: rgba(202, 235, 226, 0.5);
+}

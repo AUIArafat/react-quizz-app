@@ -16,11 +16,29 @@ body {
 
 .ant-btn-primary {
   border-color: #fff;
-  background: rgb(80, 170, 167);
+  background: #e55a29;
 }
 .ant-btn-primary:hover,
 .ant-btn-primary:active,
-.ant-btn-primaryfocus {
+.ant-btn-primary:focus {
   border-color: #fff;
-  background: rgba(80, 170, 167, 0.9);
+  background: rgba(229, 91, 41, 0.8) !important;
+}
+
+.form-title {
+  border-bottom: 1px solid black;
+  text-align: center;
+}
+
+.ant-form {
+  background: rgba(255, 255, 255, 0.7);
+}
+.container {
+  margin: 10px 120px 10px;
+  padding: 40px;
+  border-radius: 6px;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 20%);
+  height: calc(100vh - 220px);
+  overflow: auto;
+  position: relative;
 }

@@ -1,0 +1,11 @@
+.add-question-form {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  height: 87px;
+  padding: 20px 120px;
+  align-items: center;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 20%);
+  justify-content: center;
+}
