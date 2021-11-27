@@ -32,3 +32,5 @@ In the project directory, you can run:
 
 ### `yarn install`
 ### `yarn start`
+
+### Project URL: [React Quizz App](https://auiarafat.github.io/react-quizz-app/).
