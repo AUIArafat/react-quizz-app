@@ -51,57 +51,57 @@ let questions = [
 ];
 
 let answers = {
-  ["user1@quiz-app.com"]: {
-    [uuidv4()]: {
-      question: "What are the different data types present in javascript?",
-      answer: "This test answer",
-      previousAnswer: ["This is first answer", "this is second answer"],
-    },
-    [uuidv4()]: {
-      question: "What are the different data types present in javascript?",
-      answer: "This test answer",
-      previousAnswer: ["This is first answer", "this is second answer"],
-    },
-    [uuidv4()]: {
-      question: "What are the different data types present in javascript?",
-      answer: "This test answer",
-      previousAnswer: ["This is first answer", "this is second answer"],
-    },
-  },
-  ["user2@quiz-app.com"]: {
-    [uuidv4()]: {
-      question: "What are the different data types present in javascript?",
-      answer: "This test answer",
-      previousAnswer: ["This is first answer", "this is second answer"],
-    },
-    [uuidv4()]: {
-      question: "What are the different data types present in javascript?",
-      answer: "This test answer",
-      previousAnswer: ["This is first answer", "this is second answer"],
-    },
-    [uuidv4()]: {
-      question: "What are the different data types present in javascript?",
-      answer: "This test answer",
-      previousAnswer: ["This is first answer", "this is second answer"],
-    },
-  },
-  ["user3@quiz-app.com"]: {
-    [uuidv4()]: {
-      question: "What are the different data types present in javascript?",
-      answer: "This test answer",
-      previousAnswer: ["This is first answer", "this is second answer"],
-    },
-    [uuidv4()]: {
-      question: "What are the different data types present in javascript?",
-      answer: "This test answer",
-      previousAnswer: ["This is first answer", "this is second answer"],
-    },
-    [uuidv4()]: {
-      question: "What are the different data types present in javascript?",
-      answer: "This test answer",
-      previousAnswer: ["This is first answer", "this is second answer"],
-    },
-  },
+  // ["user1@quiz-app.com"]: {
+  //   ["ABCD"]: {
+  //     question: "What are the different data types present in javascript?",
+  //     answer: "This test answer",
+  //     previousAnswer: ["This is first answer", "this is second answer"],
+  //   },
+  //   [uuidv4()]: {
+  //     question: "What are the different data types present in javascript?",
+  //     answer: "This test answer",
+  //     previousAnswer: ["This is first answer", "this is second answer"],
+  //   },
+  //   [uuidv4()]: {
+  //     question: "What are the different data types present in javascript?",
+  //     answer: "This test answer",
+  //     previousAnswer: ["This is first answer", "this is second answer"],
+  //   },
+  // },
+  // ["user2@quiz-app.com"]: {
+  //   [uuidv4()]: {
+  //     question: "What are the different data types present in javascript?",
+  //     answer: "This test answer",
+  //     previousAnswer: ["This is first answer", "this is second answer"],
+  //   },
+  //   [uuidv4()]: {
+  //     question: "What are the different data types present in javascript?",
+  //     answer: "This test answer",
+  //     previousAnswer: ["This is first answer", "this is second answer"],
+  //   },
+  //   [uuidv4()]: {
+  //     question: "What are the different data types present in javascript?",
+  //     answer: "This test answer",
+  //     previousAnswer: ["This is first answer", "this is second answer"],
+  //   },
+  // },
+  // ["user3@quiz-app.com"]: {
+  //   [uuidv4()]: {
+  //     question: "What are the different data types present in javascript?",
+  //     answer: "This test answer",
+  //     previousAnswer: ["This is first answer", "this is second answer"],
+  //   },
+  //   [uuidv4()]: {
+  //     question: "What are the different data types present in javascript?",
+  //     answer: "This test answer",
+  //     previousAnswer: ["This is first answer", "this is second answer"],
+  //   },
+  //   [uuidv4()]: {
+  //     question: "What are the different data types present in javascript?",
+  //     answer: "This test answer",
+  //     previousAnswer: ["This is first answer", "this is second answer"],
+  //   },
+  // },
 };
 
 export const verifyUser = (email, password) => {
@@ -133,7 +133,6 @@ export const getAllQuestions = () => {
 
 export const createQuestion = (data) => {
   return new Promise((resolve, reject) => {
-    console.log(data);
     if (!data.question) {
       reject(new Error("Not empty question allowed!!!"));
     }
@@ -182,6 +181,58 @@ export const getAllAnswers = () => {
     } else {
       setTimeout(() => resolve(storageData.getValue("answers")), 500);
     }
+    setTimeout(() => reject(new Error("Something went wrong!!!")), 500);
+  });
+};
+
+export const getAnswersByUserId = (id) => {
+  return new Promise((resolve, reject) => {
+    let answer = null;
+    if (storageData.getValue("answers")) {
+      answers = storageData.getValue("answers");
+      answer = answers[id];
+    }
+    setTimeout(() => resolve(answer), 500);
+    setTimeout(() => reject(new Error("Something went wrong!!!")), 500);
+  });
+};
+
+export const createAnswer = (userId, data) => {
+  return new Promise((resolve, reject) => {
+    if (!data.answer)
+      setTimeout(() => reject(new Error("Empty answer not allowed!!!")), 500);
+    const ans = answers[userId];
+    if (ans) {
+      const ques = ans[data.id];
+      if (ques) {
+        ques.answer = data.answer;
+        ques.previousAnswer.push(data.answer);
+        ans[data.id] = ques;
+        answers[userId][data.id] = ques;
+      } else {
+        const newQuestionAnswer = {
+          question: data.question,
+          answer: data.answer,
+          previousAnswer: [data.answer],
+        };
+        answers[userId] = {
+          ...answers[userId],
+          [data.id]: newQuestionAnswer,
+        };
+      }
+    } else {
+      answers = {
+        ...answers,
+        [userId]: {
+          [data.id]: {
+            question: data.question,
+            answer: data.answer,
+            previousAnswer: [data.answer],
+          },
+        },
+      };
+    }
+    setTimeout(() => resolve(answers), 500);
     setTimeout(() => reject(new Error("Something went wrong!!!")), 500);
   });
 };

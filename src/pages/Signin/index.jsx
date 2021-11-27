@@ -9,6 +9,7 @@ import { useHistory } from "react-router";
 export default function SingInForm() {
   const { authenticateUser, currentUser } = useContext(UserContext);
   const history = useHistory();
+  const [form] = Form.useForm();
 
   useEffect(() => {
     if (currentUser) history.push("/");
@@ -16,6 +17,7 @@ export default function SingInForm() {
 
   const authenticate = (values) => {
     authenticateUser(values.email, values.password);
+    form.resetFields();
   };
 
   return (
@@ -26,6 +28,7 @@ export default function SingInForm() {
         remember: true,
       }}
       onFinish={authenticate}
+      form={form}
     >
       <Form.Item className={"form-title"}>
         <h1>Sign in to Continue</h1>

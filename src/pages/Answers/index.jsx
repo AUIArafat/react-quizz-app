@@ -1,5 +1,10 @@
-import { QuestionCircleOutlined, UserOutlined } from "@ant-design/icons";
-import { Collapse, Form, Table } from "antd";
+import {
+  MinusOutlined,
+  PlusOutlined,
+  QuestionCircleOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+import { Collapse, Form } from "antd";
 import { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 import SubHeader from "../../components/SubHeader";
@@ -25,7 +30,6 @@ export default function Answers() {
         {" "}
         <Collapse
           defaultActiveKey={["0"]}
-          accordion
           expandIcon={() => <UserOutlined />}
           className={"user-collapse"}
         >
@@ -33,20 +37,36 @@ export default function Answers() {
             <Panel header={key} key={index}>
               {Object.keys(answers[key]).map((data, idx) => (
                 <Collapse
-                  defaultActiveKey={["0"]}
-                  accordion
-                  expandIcon={() => <QuestionCircleOutlined />}
+                  expandIconPosition="right"
+                  expandIcon={({ isActive }) =>
+                    isActive ? <MinusOutlined /> : <PlusOutlined />
+                  }
                   className={"question-collapse"}
                 >
-                  <Panel header={answers[key][data].question} key={idx}>
-                    <span>{answers[key][data].answer}</span>
+                  <Panel
+                    // header={answers[key][data].question}
+                    header={
+                      <div className="answer-section">
+                        <div className="icon-section">
+                          <span className="question-icon">Q</span>
+                        </div>
+                        <span>{answers[key][data].question}</span>
+                      </div>
+                    }
+                    key={idx}
+                  >
+                    <div className="answer-section">
+                      <div className="icon-section">
+                        <span className="answer-icon">A</span>
+                      </div>
+                      <span>{answers[key][data].answer}</span>
+                    </div>
                   </Panel>
                 </Collapse>
               ))}
             </Panel>
           ))}
         </Collapse>
-        ,
       </Form>
     </>
   );

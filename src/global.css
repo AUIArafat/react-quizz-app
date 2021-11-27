@@ -30,10 +30,8 @@ body {
   text-align: center;
 }
 
-.ant-form {
-  background: rgba(255, 255, 255, 0.7);
-}
 .container {
+  background: rgba(255, 255, 255, 0.7);
   margin: 10px 120px 10px;
   padding: 40px;
   border-radius: 6px;
@@ -41,4 +39,16 @@ body {
   height: calc(100vh - 220px);
   overflow: auto;
   position: relative;
+}
+.question-icon {
+  background: #e55a29;
+  border-radius: 4px;
+  padding: 8px;
+  color: white;
+}
+.answer-icon {
+  background: #59b5a2;
+  border-radius: 4px;
+  padding: 8px;
+  color: white;
 }

@@ -1,6 +1,7 @@
 import { Button } from "antd";
 import { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import { UserContext } from "../../contexts/Context";
 
 import "./style/index.css";
@@ -18,9 +19,11 @@ export default function Home() {
         <span>Welcome to the</span>
         <span>React Quiz App</span>
       </h1>
-      <Button type="default" shape="round" size="large">
-        Start Quizz
-      </Button>
+      <Link to="/quiz">
+        <Button type="default" shape="round" size="large">
+          Start Quiz
+        </Button>
+      </Link>
     </div>
   );
 }
