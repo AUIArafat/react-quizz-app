@@ -34,75 +34,26 @@ let users = [
 let questions = [
   {
     id: uuidv4(),
-    question: "What are the different data types present in javascript?",
+    question: "What are the advantages of using React?",
   },
   {
     id: uuidv4(),
-    question: "Explain Hoisting in javascript.",
+    question:
+      "What are the differences between functional and class components?",
   },
   {
     id: uuidv4(),
-    question: "What is an Immediately Invoked Function in javascript?",
+    question:
+      "What is the virtual DOM? How does react use the virtual DOM to render the UI?",
   },
   {
     id: uuidv4(),
-    question: "What is the use of a constructor function in javascript?",
+    question:
+      "What are the differences between controlled and uncontrolled components?",
   },
 ];
 
-let answers = {
-  // ["user1@quiz-app.com"]: {
-  //   ["ABCD"]: {
-  //     question: "What are the different data types present in javascript?",
-  //     answer: "This test answer",
-  //     previousAnswer: ["This is first answer", "this is second answer"],
-  //   },
-  //   [uuidv4()]: {
-  //     question: "What are the different data types present in javascript?",
-  //     answer: "This test answer",
-  //     previousAnswer: ["This is first answer", "this is second answer"],
-  //   },
-  //   [uuidv4()]: {
-  //     question: "What are the different data types present in javascript?",
-  //     answer: "This test answer",
-  //     previousAnswer: ["This is first answer", "this is second answer"],
-  //   },
-  // },
-  // ["user2@quiz-app.com"]: {
-  //   [uuidv4()]: {
-  //     question: "What are the different data types present in javascript?",
-  //     answer: "This test answer",
-  //     previousAnswer: ["This is first answer", "this is second answer"],
-  //   },
-  //   [uuidv4()]: {
-  //     question: "What are the different data types present in javascript?",
-  //     answer: "This test answer",
-  //     previousAnswer: ["This is first answer", "this is second answer"],
-  //   },
-  //   [uuidv4()]: {
-  //     question: "What are the different data types present in javascript?",
-  //     answer: "This test answer",
-  //     previousAnswer: ["This is first answer", "this is second answer"],
-  //   },
-  // },
-  // ["user3@quiz-app.com"]: {
-  //   [uuidv4()]: {
-  //     question: "What are the different data types present in javascript?",
-  //     answer: "This test answer",
-  //     previousAnswer: ["This is first answer", "this is second answer"],
-  //   },
-  //   [uuidv4()]: {
-  //     question: "What are the different data types present in javascript?",
-  //     answer: "This test answer",
-  //     previousAnswer: ["This is first answer", "this is second answer"],
-  //   },
-  //   [uuidv4()]: {
-  //     question: "What are the different data types present in javascript?",
-  //     answer: "This test answer",
-  //     previousAnswer: ["This is first answer", "this is second answer"],
-  //   },
-  // },
-};
+let answers = {};
 
 export const verifyUser = (email, password) => {
   return new Promise((resolve, reject) => {
