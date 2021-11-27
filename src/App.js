@@ -6,6 +6,7 @@ import Answers from "./pages/Answers";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import { Questions } from "./pages/Questions";
+import Quiz from "./pages/Quiz";
 import Signin from "./pages/Signin";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <PrivateRoute exact path={"/"} component={Home} />
             <PrivateRoute exact path={"/questions"} component={Questions} />
             <PrivateRoute exact path={"/answers"} component={Answers} />
+            <PrivateRoute exact path={"/quiz"} component={Quiz} />
             <Route component={NotFound} />
           </Switch>
         </Layout>

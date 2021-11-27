@@ -1,0 +1,19 @@
+.ant-collapse-content-box {
+  padding: 8px 8px 16px 8px;
+}
+.answer-section {
+  display: flex;
+}
+.icon-section {
+  margin-right: 16px;
+}
+.text-section {
+  font-size: 14px;
+  line-height: 140%;
+}
+.ant-list-header {
+  background: #59b5a2;
+  text-transform: uppercase;
+  color: white;
+  font-weight: bold;
+}

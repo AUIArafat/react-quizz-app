@@ -5,6 +5,7 @@ import {
   deleteQuestions,
   getAllAnswers,
   getAllQuestions,
+  getAnswersByUserId,
   updateQuestions,
   verifyUser,
 } from "../mock-data/api";
@@ -16,12 +17,14 @@ export const UserContext = createContext({
   loading: false,
   error: null,
   setError: () => {},
+  setLoading: () => {},
   questions: [],
   fetchAllQuestions: () => {},
   removeQuestion: () => {},
   addQuestion: () => {},
   answers: {},
   fetchAllAnswers: () => {},
+  fetchAnswersById: () => {},
 });
 
 export function UserProvider({ children }) {
@@ -118,6 +121,20 @@ export function UserProvider({ children }) {
       });
   }
 
+  async function fetchAnswersById() {
+    const userId = storageData.getLoggedInUser().email;
+    setLoading(true);
+    await getAnswersByUserId(userId)
+      .then((res) => {
+        setAnswers(res);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        setError(error.toString());
+      });
+  }
+
   function logout() {
     storageData.logout();
     setCurrentUser(null);
@@ -137,6 +154,8 @@ export function UserProvider({ children }) {
     addQuestion,
     fetchAllAnswers,
     answers,
+    setLoading,
+    fetchAnswersById,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
