@@ -1,9 +1,14 @@
 import { Button } from "antd";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 
 import "./style/index.css";
 
 export default function NotFound() {
+  const history = useHistory();
+  useEffect(() => {
+    history.push("/");
+  });
   return (
     <div className={"text-box"}>
       <h1 className={"primary-heading"}>
