@@ -6,7 +6,7 @@ import { UserContext } from "../../contexts/Context";
 
 import "./style/index.css";
 
-export default function Home() {
+export default function HomePage() {
   const history = useHistory();
   const { currentUser } = useContext(UserContext);
   useEffect(() => {
